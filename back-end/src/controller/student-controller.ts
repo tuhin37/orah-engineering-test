@@ -24,6 +24,11 @@ export class StudentController {
     return this.studentRepository.save(student)
   }
 
+  async getStudent(request: Request, response: Response, next: NextFunction) {
+    console.log("here")
+    console.log(request)
+  }
+
   async updateStudent(request: Request, response: Response, next: NextFunction) {
     const { body: params } = request
 
