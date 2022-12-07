@@ -36,7 +36,6 @@ export class Group {
     this.incidents = input.incidents
     this.ltmt = input.ltmt
     this.run_at = input.run_at
-    this.student_count = input.student_count
-    
+    this.student_count = input.student_count 
   }
 }
