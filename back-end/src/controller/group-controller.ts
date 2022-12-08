@@ -1,16 +1,15 @@
 import { getRepository } from "typeorm"
 import { NextFunction, Request, Response } from "express"
 import { Group } from "../entity/group.entity"
-import { CreateGroupInput } from "../interface/group.interface"
+import { CreateGroupInput, UpdateGroupInput } from "../interface/group.interface"
+
 import { getJSDocParameterTags } from "typescript"
 
 export class GroupController {
   private groupRepository = getRepository(Group)
 
   async allGroups(request: Request, response: Response, next: NextFunction) {
-    // Task 1: 
-    
-    // Return the list of all groups
+    return this.groupRepository.find()
   }
 
   async createGroup(request: Request, response: Response, next: NextFunction) {
@@ -30,21 +29,28 @@ export class GroupController {
     return this.groupRepository.save(group)
   }
 
-  async getAllGroups(request: Request, response: Response, next: NextFunction) {
-    // Task 1: 
-    return this.groupRepository.find()
-  }
+
 
   async updateGroup(request: Request, response: Response, next: NextFunction) {
-    // Task 1: 
-    
-    // Update a Group
+    const { body: params } = request
+    this.groupRepository.findOne(params.id).then((group) => {
+      const updateGroupInput: UpdateGroupInput = {
+        id: params.id,
+        name: params.name,
+        number_of_weeks: params.number_of_weeks,
+        roll_states: params.roll_states,
+        incidents: params.incidents,
+        ltmt: params.ltmt
+      }
+      group.prepareToUpdate(updateGroupInput)
+      return this.groupRepository.save(group);
+    })
   }
 
   async removeGroup(request: Request, response: Response, next: NextFunction) {
-    // Task 1: 
-    
-    // Delete a Group
+    let groupToRemove = await this.groupRepository.findOne(request.params.id)
+    await this.groupRepository.remove(groupToRemove)
+    return 'ok' // todo => error checking and return
   }
 
   async getGroupStudents(request: Request, response: Response, next: NextFunction) {
