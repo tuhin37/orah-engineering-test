@@ -76,6 +76,7 @@ export class RollController {
     }
     const studentRollState = new StudentRollState()
     studentRollState.prepareToCreate(createStudentRollStateInput)
+    console.log(studentRollState)
     return this.studentRollStateRepository.save(studentRollState)
   }
 
