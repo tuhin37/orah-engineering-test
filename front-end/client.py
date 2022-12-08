@@ -51,6 +51,12 @@ def insert_student_attendence(roll_id):
 
 
 if __name__ == "__main__":
-    # random_state_generator()
-    # insert_student_attendence(1)
-    create_rools()
+    # This creates 30 days roll entry in the roll table. It assumes that only rolls are created for maths of class 5. e.g. 'maths-5'
+    #  roll table will have data from 8th Nov to 7th Dec
+    # create_rools()
+    
+
+    # insert random student attendance for each record created in the 'roll' table
+    for i in range(1, 31):
+        insert_student_attendence(i)
+    
