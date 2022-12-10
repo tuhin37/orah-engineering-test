@@ -221,7 +221,9 @@ export class GroupController {
     const students = res.map(student => {
       return {
         id: student['id'], // Included the id, in case there are two or more students with the same name
-        name: `${student['first_name']} ${student['last_name']}`
+        first_name: student['first_name'],
+        last_name: student['last_name'],
+        full_name: `${student['first_name']} ${student['last_name']}`
       }
     })
     // Return the list of Students that are in a Group

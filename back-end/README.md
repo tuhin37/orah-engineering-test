@@ -494,11 +494,15 @@ Response
 [
     {
         "id": 5,
-        "name": "Paul McCartney"
+        "first_name": "Paul",
+        "last_name": "McCartney",
+        "full_name": "Paul McCartney"
     },
     {
         "id": 10,
-        "name": "Neil Diamond"
+        "first_name": "Neil",
+        "last_name": "Diamond",
+        "full_name": "Neil Diamond"
     }
 ]
 ```
@@ -523,19 +527,27 @@ Response
 [
     {
         "id": 2,
-        "name": "Robert Plant"
+        "first_name": "Robert",
+        "last_name": "Plant",
+        "full_name": "Robert Plant"
     },
     {
         "id": 6,
-        "name": "George Harrison"
+        "first_name": "George",
+        "last_name": "Harrison",
+        "full_name": "George Harrison"
     },
     {
         "id": 9,
-        "name": "John Denver"
+        "first_name": "John",
+        "last_name": "Denver",
+        "full_name": "John Denver"
     },
     {
         "id": 11,
-        "name": "Donna Summer"
+        "first_name": "Donna",
+        "last_name": "Summer",
+        "full_name": "Donna Summer"
     }
 ]
 ```
