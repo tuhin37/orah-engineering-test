@@ -9,6 +9,7 @@
       "class-transformer": "^0.5.1",
       "class-validator": "^0.13.2",
       "cors": "^2.8.5",
+      "dateformat": "^5.0.3",
       "express": "^4.15.4",
       "lodash": "^4.17.21",
       "reflect-metadata": "^0.1.10",

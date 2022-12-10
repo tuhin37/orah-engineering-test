@@ -1,6 +1,6 @@
 import { info } from "console"
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
-import { CreateGroupInput, UpdateGroupInput } from "../interface/group.interface"
+import { CreateGroupInput, UpdateGroupInput, PostAnalysisUpdateGroupInput} from "../interface/group.interface"
 
 @Entity()
 export class Group {
@@ -47,5 +47,11 @@ export class Group {
     this.roll_states = input.roll_states
     this.incidents = input.incidents
     this.ltmt = input.ltmt
+  }
+
+  public prepareToUpdatePostAnalysis(input: PostAnalysisUpdateGroupInput) {
+    this.id = input.id
+    this.run_at = input.run_at
+    this.student_count = input.student_count
   }
 }

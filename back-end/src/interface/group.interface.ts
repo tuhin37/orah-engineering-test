@@ -17,3 +17,9 @@ export interface UpdateGroupInput {
   incidents: number
   ltmt: string
 }
+
+export interface PostAnalysisUpdateGroupInput {
+  id: number
+  run_at: Date
+  student_count: number
+}
