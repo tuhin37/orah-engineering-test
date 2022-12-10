@@ -1,17 +1,20 @@
 # Back End Engineering Test
+
 At Orah, most of our back end services are written in Typescript/Javascript/Node. This project shares similarities with our main web application in terms of technologies used. Hopefully this will give you some idea of what its like to be working on the team at Orah as you are working on this project.
 
 ## Instructions
+
 This test has all the necessary components for a functional app with some missing functionality which you will need to implement, however please feel free to add any files/components you deem useful.
 
 Please fork this repo under your own github account and create a branch named `solution` once you are ready to start and commit as you would normally do under your own `solution` branch as we would love to see how you progress.
 
-### Note: Do not create Pull Request. 
+### Note: Do not create Pull Request.
 
 Share the link of the forked repository once you are finished with your `solution`.
 
 ## Technology
-This project is mainly written in Typescript with Node. If you are not  familar with Typescript, you can check out this quick start guide [here](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html).
+
+This project is mainly written in Typescript with Node. If you are not familar with Typescript, you can check out this quick start guide [here](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html).
 
 We use TypeORM for our ORM. You can check out TypeORM [here](https://typeorm.io/#/).
 
@@ -23,41 +26,77 @@ These are the tables that we have generated:
 
 ```sql
 CREATE TABLE roll(
-   	id INT PRIMARY KEY NOT NULL,
-   	name VARCHAR(255) NOT NULL,
-	completed_at DATE NOT NULL
+
+id INT PRIMARY KEY NOT NULL,
+
+name VARCHAR(255) NOT NULL,
+
+completed_at DATE NOT NULL
+
 );
+
+
 
 CREATE TABLE student(
-    id INT PRIMARY KEY NOT NULL,
-    first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL,
-    photo_url VARCHAR(255) NOT NULL
+
+id INT PRIMARY KEY NOT NULL,
+
+first_name VARCHAR(255) NOT NULL,
+
+last_name VARCHAR(255) NOT NULL,
+
+photo_url VARCHAR(255) NOT NULL
+
 );
+
+
 
 CREATE TABLE student_roll_state(
-   	id INT PRIMARY KEY NOT NULL,
-	student_id INT NOT NULL,
-	roll_id INT NOT NULL,
-	state CHAR(10) NOT NULL
+
+id INT PRIMARY KEY NOT NULL,
+
+student_id INT NOT NULL,
+
+roll_id INT NOT NULL,
+
+state CHAR(10) NOT NULL
+
 );
+
+
 
 CREATE TABLE group(
-   	id INT PRIMARY KEY NOT NULL,
-   	name VARCHAR(255) NOT NULL,
-	number_of_weeks INTEGER NOT NULL,
-	roll_states VARCHAR(255) NOT NULL,
-	incidents INTEGER NOT NULL,
-	ltmt CHAR NOT NULL,
-	run_at DATE,
-	student_count INTEGER NOT NULL
+
+id INT PRIMARY KEY NOT NULL,
+
+name VARCHAR(255) NOT NULL,
+
+number_of_weeks INTEGER NOT NULL,
+
+roll_states VARCHAR(255) NOT NULL,
+
+incidents INTEGER NOT NULL,
+
+ltmt CHAR NOT NULL,
+
+run_at DATE,
+
+student_count INTEGER NOT NULL
+
 );
 
+
+
 CREATE TABLE student_group(
-   	id INT PRIMARY KEY NOT NULL,
-	group_id INT NOT NULL,
-	student_id INT NOT NULL,
-	incident_count INT NOT NULL
+
+id INT PRIMARY KEY NOT NULL,
+
+group_id INT NOT NULL,
+
+student_id INT NOT NULL,
+
+incident_count INT NOT NULL
+
 );
 ```
 
@@ -68,6 +107,7 @@ cd back-end && sqlite3 backend-test.db
 ```
 
 ## How to get started and run the back end app
+
 You will need to have Node **10.16.0** or later on your local development machine. You can use [nvm](https://github.com/creationix/nvm#installation) (macOS/Linux) or [nvm-windows](https://github.com/coreybutler/nvm-windows#node-version-manager-nvm-for-windows) to switch Node versions between different projects.
 
 ### First install all dependencies
@@ -86,26 +126,33 @@ cd back-end && npm start
 
 Once the app is compiled successfully you can open the browser and go to http://localhost:4001/student/get-all to see a list of students
 
-
 ## Project structure
+
 Open the project in VSCode as a workspace and install the recommented plugins:
 
 ```sh
 cd back-end && sqlite3 backend-test.db
 ```
+
 - `vscode-eslint` for linting
+  
 - `prettier-vscode` for formatting
+  
 
 You should see the project is structured as follows:
 
 ```
 .
-└── back-end
-    └── src
-        ├── controller
-        ├── entity
-        └── interface
 
+└── back-end
+
+└── src
+
+├── controller
+
+├── entity
+
+└── interface
 ```
 
 ### src/controller
@@ -113,12 +160,15 @@ You should see the project is structured as follows:
 This is the place for the controllers which contain the actual API functions used by the routes. The client app will call these API functions via the routes setup in `routes.ts`. We have three controllers:
 
 1. GroupController - the apis for Group CRUD as well as running the Group Filters to populate the Groups with Students.
+  
 2. RollController - the apis for Roll CRUD as well as for running Student Rolls and storing the resulting Student Roll states.
+  
 3. StudentController - the apis for Student CRUD
+  
 
 ### src/entity
 
-This is where we have our TypeORM entities. We have one entity per database table. We are using `sqlite3` for our database. In the root folder you will see the `backend-test.db` file which is the sqlite3 database we use. That is configured in `ormconfig.json`. 
+This is where we have our TypeORM entities. We have one entity per database table. We are using `sqlite3` for our database. In the root folder you will see the `backend-test.db` file which is the sqlite3 database we use. That is configured in `ormconfig.json`.
 
 ### src/interface
 
@@ -133,13 +183,19 @@ Note, you will see in `index.ts` that 15 students have been added automatically 
 You wil be able to use Postman to do the following:
 
 1. Get all students: GET http://localhost:4001/student/get-all
+  
 2. Create a roll: POST http://localhost:4001/roll/create
+  
 3. Add student roll states to the roll: POST http://localhost:4001/roll/add-student-states
+  
 4. (Not yet implemented) Create a group: POST http://localhost:4001/group/create
+  
 5. (Not yet implemented) Run the group filters: POST http://localhost:4001/group/run-group-filters
+  
 6. (Not yet implemented) Get the group list: GET http://localhost:4001/group/get-all
+  
 7. (Not yet implemented) Get students in a group: GET http://localhost:4001/group/get-students-in-group
-
+  
 
 ## Tasks Background
 
@@ -151,26 +207,38 @@ A `Group` is first created with "roll filter" settings (explained below), and no
 
 A `Group` is created with the following "roll filter" settings:
 
-* **name** - name of the group, e.g. "Frequently late students"
-* **number_of_weeks** - the number of weeks in the past (from now) used to analyse roll data, e.g. 2
-* **roll_states** - a csv of of roll states to match students with, e.g. "late" or "absent,late"
-* **incidents** - the number of occurrences that a student needs to match to be included in the filter, e.g. 3
-* **ltmt** - whether the student needs to match Less Than or More Than the "incidents" value to be included in the filter, e.g. "<" (less than) or ">" (more than)
+- **name** - name of the group, e.g. "Frequently late students"
+  
+- **number_of_weeks** - the number of weeks in the past (from now) used to analyse roll data, e.g. 2
+  
+- **roll_states** - a csv of of roll states to match students with, e.g. "late" or "absent,late"
+  
+- **incidents** - the number of occurrences that a student needs to match to be included in the filter, e.g. 3
+  
+- **ltmt** - whether the student needs to match Less Than or More Than the "incidents" value to be included in the filter, e.g. "<" (less than) or ">" (more than)
+  
 
 Once the group(s) have been created, the "RunGroupFilters" api (Task 2) is run to populate the groups with students based on their roll attendance and the "roll filter" settings saved to that group.
 
 For example, we create the "Frequently late students" group with the following settings:
 
 - *number_of_weeks*: 2
+  
 - *roll_states*: "late"
+  
 - *incidents*: 3
+  
 - *ltmt*: ">" (more than)
+  
 
 Once we run this group filter, we analyse the roll data over the previous 2 weeks to find which students have been "late" more than 3 times. The matching students should then be saved to the group (in the `student_group` table). The following metadata should also be saved:
 
-* **group.run_at** - the date and time the group filter was run
-* **group.student_count** - the count of students that were matched and saved to the group
-* **student_group.incident_count** - the number of roll occurrences that were found to match the filter for that particular student
+- **group.run_at** - the date and time the group filter was run
+  
+- **group.student_count** - the count of students that were matched and saved to the group
+  
+- **student_group.incident_count** - the number of roll occurrences that were found to match the filter for that particular student
+  
 
 ## Task 1 - Develop the Group CRUD lifecycle API's
 
@@ -180,13 +248,18 @@ We need to be able to create groups, update groups, delete groups and get a list
 
 Looking at the Group table, create an API so that a Group can be created with all of the fields populated. It is important that the client provides values for these fields:
 
-* `name` the name of the group
-* `number_of_weeks` will just be an integer, representing the number of weeks for the analysis period
-* `roll_states` will be one or more of the following values: `"unmark" | "present" | "absent" | "late"`
-* `incidents` is an integer representing the number of times the student meets the criteria in the period
-* `ltmt` stands for "Less Than or More Than". It will be either a `"<"` string or `">"`.
+- `name` the name of the group
+  
+- `number_of_weeks` will just be an integer, representing the number of weeks for the analysis period
+  
+- `roll_states` will be one or more of the following values: `"unmark" | "present" | "absent" | "late"`
+  
+- `incidents` is an integer representing the number of times the student meets the criteria in the period
+  
+- `ltmt` stands for "Less Than or More Than". It will be either a `"<"` string or `">"`.
+  
 
-### UpdateGroup and DeleteGroup API   	
+### UpdateGroup and DeleteGroup API
 
 These APIs will allow the client to update a group and delete a group. The update group API allows the user to update the same fields as the CreateGroup API.
 
@@ -198,26 +271,282 @@ The GetGroups API will return a list of groups and will contain all the group fi
 
 The GetGroupStudents API will return a list of the Students in the Group. It will return an array of students and include the fields: `id`, `first_name`, `last_name` and `full_name` (which is derived from the first and last name).
 
-## Task 2 - Develop the RunGroupFilters API 
+## Task 2 - Develop the RunGroupFilters API
 
 In order to complete this task, you will need roll data in the database. Use the existing roll api routes to generate some roll data over the last few weeks that will be used for analysis.
 
 When the user runs the Group Filters to do an Analysis, the following will happen:
 
 1. The Students currently in each Group will be deleted
+  
 2. The filter will be run against each group, analysing the roll data and populating the matching students into the group.
+  
 3. The metadata (explained above) will also be stored:
-    - `student_group.incident_count` (per student)
-    - `group.run_at`
-    - `group.student_count` 
+  
+
+- `student_group.incident_count` (per student)
+  
+- `group.run_at`
+  
+- `group.student_count`
+  
 
 As explained above, the "roll filters" we need to support are:
 
 1. Time Period in Weeks (`number_of_weeks`), AND
+  
 2. One or more Roll States: `"unmark" | "present" | "absent" | "late"` (`roll_states`), AND
-3. (Greater than the Number of Incidents in the Time Period, OR 
+  
+3. (Greater than the Number of Incidents in the Time Period, OR
+  
 4. Less then the Number of Incidents in the Time Period) (`ltmt` and `incidents`)
+  
 
 ## Solution Presentation
 
 You will present your solution to us in an interview setting. We would like to see the working API's being called via Postman, just like you would when you are testing. We especially want to see proof that "RunGroupFilters" API is working as intended.
+
+# Solution
+
+## 1. Run the python client to populate roll and attendance data
+
+The python client is in ../front-end/client.py. Run the client using
+
+```shell
+cd ../front-end
+python3 client.py
+```
+
+The clienr will ask for number of days, for which you wish to populate data. For example if entered 60, then the client will create 60 roll events (assuming each for a day). The client also assumes there were only one type of event happened, for which daly roll is created. In this case it's 'math-5' which is short for math of class 5
+
+The client, initially will clear 'group' and 'student_roll_state' tables.
+
+the client then goes on and fills random sttendance data for each student and for each roll event (day). As there are 15 students available and 60 days for roll even is created, that means 'student_roll_state' table will have 900 (=15*60) data points
+
+The client also assumes the for attendance states (present | late | absent | unmark) are equally weighted.
+
+## 2. Lets now create two groups
+
+This is the curl call to create the first group
+
+```shell
+curl --location --request POST 'http://localhost:4001/group/create' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "always-late",
+    "number_of_weeks": 3,
+    "roll_states": "late",
+    "incidents": 7,
+    "ltmt": ">"
+}'
+```
+
+Response
+
+```json
+{
+    "status": "successful",
+    "msg": {
+        "name": "always-late",
+        "number_of_weeks": 3,
+        "roll_states": "late",
+        "incidents": 7,
+        "ltmt": ">",
+        "id": 1
+    }
+}
+```
+
+This is the curl to create the second group
+
+```shell
+curl --location --request POST 'http://localhost:4001/group/create' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "most-present",
+    "number_of_weeks": 3,
+    "roll_states": "late, absent",
+    "incidents": 8,
+    "ltmt": "<"
+}'
+```
+
+Response
+
+```json
+{
+    "status": "successful",
+    "msg": {
+        "name": "most-present",
+        "number_of_weeks": 3,
+        "roll_states": "late, absent",
+        "incidents": 8,
+        "ltmt": "<",
+        "id": 2
+    }
+}
+```
+
+Note that metadata with default values (run_at and student_count) are not returned
+
+## 3. Check if the groups are created
+
+Curl to get all groups
+
+```shell
+curl --location --request GET 'http://localhost:4001/group/get-all'
+```
+
+Response
+
+```json
+[
+    {
+        "id": 1,
+        "name": "always-late",
+        "number_of_weeks": 3,
+        "roll_states": "late",
+        "incidents": 7,
+        "ltmt": ">",
+        "run_at": "1970-01-01T00:00:00.000Z",
+        "student_count": 0
+    },
+    {
+        "id": 2,
+        "name": "most-present",
+        "number_of_weeks": 3,
+        "roll_states": "late, absent",
+        "incidents": 8,
+        "ltmt": "<",
+        "run_at": "1970-01-01T00:00:00.000Z",
+        "student_count": 0
+    }
+]
+```
+
+Note here **'run_at'** and **'student_clount'** fields are pre populated with default values. They will be updated here once **run-group-filter** is run.
+
+## 4. Run
+
+Curl for run-group-filter
+
+```shell
+curl --location --request POST 'http://localhost:4001/group/run-group-filters' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    
+}' 
+```
+
+Response
+
+```json
+{
+    "status": "successful",
+    "msg": "analysis complete"
+}
+```
+
+## 5. Check the groups
+
+Curl get groups
+
+```shell
+curl --location --request GET 'http://localhost:4001/group/get-all'
+```
+
+Response
+
+```json
+[
+    {
+        "id": 1,
+        "name": "always-late",
+        "number_of_weeks": 3,
+        "roll_states": "late",
+        "incidents": 7,
+        "ltmt": ">",
+        "run_at": "2022-12-10T19:08:15.236Z",
+        "student_count": 2
+    },
+    {
+        "id": 2,
+        "name": "most-present",
+        "number_of_weeks": 3,
+        "roll_states": "late, absent",
+        "incidents": 8,
+        "ltmt": "<",
+        "run_at": "2022-12-10T19:08:15.238Z",
+        "student_count": 4
+    }
+```
+
+Note that **run_at** and **student_count** are populated autometically. Acording to the analysis it was found that there are 2 students who came late more than 7 times in last 3 weeks. Also there are 4 students who have been most attentive in last 3 weeks
+
+## 7. Lets check the students
+
+Curl to get the results for the first group (filter).
+
+```shell
+curl --location --request POST 'http://localhost:4001/group/get-students-in-group' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "id": "1"
+}'
+```
+
+Response
+
+```json
+[
+    {
+        "id": 5,
+        "name": "Paul McCartney"
+    },
+    {
+        "id": 10,
+        "name": "Neil Diamond"
+    }
+]
+```
+
+##### Conclusion:
+
+**Paul McCartney** (student_id=5) and **Neil Diamond** (student_id=10) have bunked the most
+
+curl to get the results for the second group
+
+```shell
+curl --location --request POST 'http://localhost:4001/group/get-students-in-group' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "id": "2"
+}'
+```
+
+Response
+
+```json
+[
+    {
+        "id": 2,
+        "name": "Robert Plant"
+    },
+    {
+        "id": 6,
+        "name": "George Harrison"
+    },
+    {
+        "id": 9,
+        "name": "John Denver"
+    },
+    {
+        "id": 11,
+        "name": "Donna Summer"
+    }
+]
+```
+
+##### Conclusion:
+
+It seems like **Robert Plant**, **George Harrison**, **John Denver** and **Donna Summer** have been most attentive
